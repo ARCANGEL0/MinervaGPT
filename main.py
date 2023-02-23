@@ -2,15 +2,16 @@
 import telebot
 import requests
 import json
+import traceback
 from telebot import types
 
 
 # Token API do bot
-bot = telebot.TeleBot(token="BOT TOKEN")
+bot = telebot.TeleBot(token="Bot token")
 
 
 # chave API da OpenAI
-API_KEY = 'OPENAI API TOKEN'
+API_KEY = 'OPEN AI KEY'
 # modelo da IA
 MODEL = 'text-davinci-003'
 
@@ -73,28 +74,34 @@ def getCEP(prompt):
          
          
     except Exception as e:
-          print(e)
+          print(e);traceback.print_exc()
           markup = types.InlineKeyboardMarkup()
           markup.add(types.InlineKeyboardButton("⬅️ Voltar",callback_data="/voltar"))
           bot.send_message(chat_id=prompt.from_user.id, text=' 🚫 CEP Informado está inválido', reply_markup=markup)
                
 def getImg(prompt):      
+    try:
          res = MinervaImage(prompt.text)
          bot.send_photo(prompt.chat.id,res) 
-
+    except Exception as e:
+        print(e);traceback.print_exc()
+        bot.send_message(chat_id=prompt.from_user.id, text='Ops! Houve algum errp ao gerar a imagem, entre em contato com meu desenvolvedor para mais detalhes')
 
 def MinervaText(prompt):
     #    requisicao para openAI
-    response = requests.post(
+  try:
+        response = requests.post(
         'https://api.openai.com/v1/completions',
         headers={'Authorization': f'Bearer {API_KEY}'},
         json={'model': MODEL, 'prompt': prompt, 'temperature': 0.8, 'max_tokens': 300}
     )
-
-    result = response.json()
-
-    return result['choices'][0]['text']
-   
+       
+        result = response.json()
+        print(result)
+        return result['choices'][0]['text']
+  except Exception as e:
+       return "Ops! Houve algum erro interno na comunicação. Por favor, tente novamente."
+       print(e);traceback.print_exc()
 
 
 def MinervaImage(prompt):
@@ -113,19 +120,32 @@ def MinervaImage(prompt):
 
 def handler_text(message):
            if "Desenhe" in message.text:
-               
-               prompt = message.text.replace("Desenhe", "")
-               res = MinervaImage(prompt)
+               try:    
+                   prompt = message.text.replace("Desenhe", "")
+                   res = MinervaImage(prompt)
               
-               bot.send_photo(message.chat.id,res)
+                   bot.send_photo(message.chat.id,res)
+               except Exception as e:
+                    return "Ops! Houve algum erro e não consegui gerar a imagem. Contate meu desenvolvedor para mais detalhes"
+                    print(e);traceback.print_exc() 
            elif "desenhe" in message.text:
-               prompt = message.text.replace("desenhe", "")
-               res = MinervaImage(prompt)
-               bot.send_photo(message.chat.id,res)
+                 try:         
+                       prompt = message.text.replace("Desenhe", "")
+                       res = MinervaImage(prompt)
+              
+                       bot.send_photo(message.chat.id,res)
+                 except Exception as e:
+                    return "Ops! Houve algum erro e não consegui gerar a imagem. Contate meu desenvolvedor para mais detalhes"
+                    print(e);traceback.print_exc()
            elif "/img" in message.text:
-               prompt = message.text.replace("/img", "")
-               res = MinervaImage(prompt)
-               bot.send_photo(message.chat.id,res)
+                 try:         
+                        prompt = message.text.replace("Desenhe", "")
+                        res = MinervaImage(prompt)
+              
+                        bot.send_photo(message.chat.id,res)
+                 except Exception as e:
+                    return "Ops! Houve algum erro e não consegui gerar a imagem. Contate meu desenvolvedor para mais detalhes"
+                    print(e);traceback.print_exc()
            elif "/cep" in message.text:
                prompt = message.text.replace("/cep", "")
                print(prompt)
