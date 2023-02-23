@@ -1,5 +1,5 @@
 # MinervaGPT
-Projeto simples com python de um bot para telegram fazendo uso da IA da OpenAI, que consulta CEP, gera imagems com base em texto e responder qualquer pergunta feita prlo usuário.
+Projeto simples com python de um bot para telegram fazendo uso da IA da OpenAI, que consulta CEP, gera imagems com base em texto e responde qualquer pergunta feita prlo usuário.
 
 # Uso 
 Clone o repositorio 
