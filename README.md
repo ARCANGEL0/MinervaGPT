@@ -7,11 +7,11 @@ Clone o repositorio
 git clone https://github.com/ARCANGEL0/MinervaGPT
 cd MinervaGPT
 ```
-instale as dependências do projeto com pip
+Instale as dependências do projeto com pip
 ```bash
 pip install -r requirements.txt
 ```
-Altere as variáveis globais e insira suaa tokens do bot do telegram e a chave API da OpenAI
+Altere as variáveis globais em main.py e insira seus tokens do bot do telegram e a chave API da OpenAI
 ```python
 ...
 
