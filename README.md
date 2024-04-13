@@ -1,32 +1,29 @@
 # MinervaGPT
-Projeto simples com python de um bot para telegram fazendo uso da IA da OpenAI, que consulta CEP, gera imagems com base em texto e responde qualquer pergunta feita prlo usuário.
+Simple project with python of a bot for Telegram using AI from OpenAI, which queries CEP, generates images based on text and answers any question asked by the user.
 
-# Uso 
-Clone o repositorio 
+# Usage
+Clone the repo
 ```bash
 git clone https://github.com/ARCANGEL0/MinervaGPT
 cd MinervaGPT
 ```
-Instale as dependências do projeto com pip
+Install project dependencies with pip
 ```bash
 pip install -r requirements.txt
 ```
-Altere as variáveis globais em main.py e insira seus tokens do bot do telegram e a chave API da OpenAI
+Change the global variables in main.py and insert your Telegram bot tokens and OpenAI API key
 ```python
 ...
 
-# Token API do bot
+# Token API ofn your bot
 bot = telebot.TeleBot(token="BOT TOKEN")
 
 
-# chave API da OpenAI
+# API key OpenAI
 API_KEY = 'OPENAI API TOKEN'
 ...
 ```
-Depois, rode o arquivo main.py e teste seu bot!
+Then, run the main.py file and test your bot!
 ```bash
 python main.py
 ```
-
-# Demo
-Uma demonstração do bot pode ser feita através do meu bot pessoal [aqui](https://t.me/MinervaGPTBOT)
